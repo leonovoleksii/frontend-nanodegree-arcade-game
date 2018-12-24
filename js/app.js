@@ -35,10 +35,9 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, speed) {
+var Player = function(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = speed;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -52,16 +51,16 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(keyPress) {
     if (keyPress == 'left') {
-        player.x -= player.speed;
+        player.x -= 100;
     }
     if (keyPress == 'up') {
-        player.y -= player.speed - 20;
+        player.y -= 80;
     }
     if (keyPress == 'right') {
-        player.x += player.speed;
+        player.x += 100;
     }
     if (keyPress == 'down') {
-        player.y += player.speed - 20;
+        player.y += 80;
     }
     console.log('keyPress is: ' + keyPress);
 };
@@ -70,7 +69,7 @@ Player.prototype.handleInput = function(keyPress) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(100, 383, 50);
+var player = new Player(202.5, 383);
 var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 
 allEnemies.push(enemy);
