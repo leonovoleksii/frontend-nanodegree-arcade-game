@@ -1,6 +1,9 @@
 const START_X = 202.5;
 const START_Y = 383;
 const MAX_LIVES = 3;
+const ENEMY_X = [80, 100, 120];
+const ENEMY_Y = [55, 145, 230, 300];
+const ENEMY_SPEED = [80, 100, 120];
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -34,6 +37,18 @@ Enemy.prototype.update = function(dt) {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+//This function adds new enemy
+var increaseDifficulty = function(enemyArr) {
+    var enemy = new Enemy(ENEMY_X[getRandomInt(3)],
+        ENEMY_Y[getRandomInt(3)],
+        ENEMY_SPEED[getRandomInt(3)])
+    enemyArr.push(enemy);
 };
 
 // Now write your own player class
@@ -91,8 +106,7 @@ var checkCollision = function(anEnemy) {
         player.x = START_X;
         player.y = START_Y;
         player.score++;
-
-        //ctx.fillRect(0, 0, 505, 171);
+        increaseDifficulty(allEnemies);
     }
 
     // check if player runs into left, bottom, or right canvas walls
@@ -111,12 +125,8 @@ var checkCollision = function(anEnemy) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [
-    new Enemy(0, 55, 80),
-    new Enemy(0, 145, 100),
-    new Enemy(-250, 300, 80),
-    new Enemy(-250, 230, 120),
-];
+var allEnemies = [];
+increaseDifficulty(allEnemies);
 var player = new Player(START_X, START_Y);
 
 
