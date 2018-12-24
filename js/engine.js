@@ -55,7 +55,18 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        if (player.lives <= 0) {
+            renderTheEnd();
+        } else {
+            win.requestAnimationFrame(main);
+        }
+    }
+
+    var renderTheEnd = function() {
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#bc1700";
+        ctx.font = '80px san-serif';
+        ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2);
     }
 
     /* This function does some initial setup that should only occur once,
@@ -122,6 +133,7 @@ var Engine = (function(global) {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.font = "30px Arial";
         ctx.fillText(`Life: ${player.lives}`, 415, 30);
+        ctx.fillText(`Score: ${player.score}`, 15, 30);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that

@@ -43,6 +43,7 @@ var Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.lives = MAX_LIVES;
+    this.score = 0;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -81,6 +82,17 @@ var checkCollision = function(anEnemy) {
             player.lives--;
             player.x = START_X;
             player.y = START_Y;
+        }
+
+    // check for player reaching top of canvas and winning the game
+    // if player wins, add 1 to the score and level
+    // pass score as an argument to the increaseDifficulty function
+    if (player.y <= 0) {
+        player.x = START_X;
+        player.y = START_Y;
+        player.score++;
+
+        //ctx.fillRect(0, 0, 505, 171);
     }
 
     // check if player runs into left, bottom, or right canvas walls
