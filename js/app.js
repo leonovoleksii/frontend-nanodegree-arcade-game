@@ -1,5 +1,6 @@
 const START_X = 202.5;
 const START_Y = 383;
+const MAX_LIVES = 3;
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -41,6 +42,7 @@ Enemy.prototype.render = function() {
 var Player = function(x, y) {
     this.x = x;
     this.y = y;
+    this.lives = MAX_LIVES;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -75,9 +77,10 @@ var checkCollision = function(anEnemy) {
         && player.x + 25 <= anEnemy.x + 88
         && player.y + 73 <= anEnemy.y + 135
         && player.x + 76 >= anEnemy.x + 11) {
-        console.log('collided');
-        player.x = 202.5;
-        player.y = 383;
+            console.log('collided');
+            player.lives--;
+            player.x = START_X;
+            player.y = START_Y;
     }
 
     // check if player runs into left, bottom, or right canvas walls
