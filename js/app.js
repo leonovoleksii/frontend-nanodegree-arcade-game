@@ -79,6 +79,18 @@ var checkCollision = function(anEnemy) {
         player.x = 202.5;
         player.y = 383;
     }
+
+    // check if player runs into left, bottom, or right canvas walls
+    // prevent player from moving beyond canvas wall boundaries
+    if (player.y > 383 ) {
+        player.y = 383;
+    }
+    if (player.x > 402.5) {
+        player.x = 402.5;
+    }
+    if (player.x < 2.5) {
+        player.x = 2.5;
+    }
 };
 
 // Now instantiate your objects.
