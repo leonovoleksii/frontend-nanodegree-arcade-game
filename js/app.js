@@ -27,7 +27,7 @@ Enemy.prototype.update = function(dt) {
         this.x = 0;
     }
 
-    //checkCollision(this);
+    checkCollision(this);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -66,6 +66,19 @@ Player.prototype.handleInput = function(keyPress) {
         player.y += 80;
     }
     console.log('keyPress is: ' + keyPress);
+};
+
+var checkCollision = function(anEnemy) {
+    // check for collision between enemy and player
+    if (
+        player.y + 131 >= anEnemy.y + 90
+        && player.x + 25 <= anEnemy.x + 88
+        && player.y + 73 <= anEnemy.y + 135
+        && player.x + 76 >= anEnemy.x + 11) {
+        console.log('collided');
+        player.x = 202.5;
+        player.y = 383;
+    }
 };
 
 // Now instantiate your objects.
